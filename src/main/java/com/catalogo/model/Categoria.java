@@ -1,0 +1,31 @@
+package com.catalogo.model;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import lombok.Data;
+
+@Entity
+@Data
+public class Categoria {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore
+	private long id;
+	@Column(nullable = false, unique = true)
+	private String nome;
+	@ManyToMany(mappedBy = "categorie")
+	@JsonIgnore
+	private List<Libro> libri;
+}
